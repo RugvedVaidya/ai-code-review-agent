@@ -17,3 +17,8 @@ class ReviewState(TypedDict):
     max_retries: int
 
     results: List[dict]
+    
+    repo_path : str
+    repo_url : str
+    
+    report_path : str

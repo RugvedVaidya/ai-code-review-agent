@@ -65,8 +65,7 @@ def build_graph():
     )
 
     graph.add_edge(
-        "aggregate_results",
-        END
+        "aggregate_results"
     )
 
     graph.add_node(
@@ -113,5 +112,33 @@ def build_graph():
         "code_fix_agent",
         "pytest_agent"
     )
+
+    graph.add_node(
+        "github_loader_agent",
+        github_loader_agent
+    )
     
+    graph.set_entry_point(
+        "github_loader_agent"
+    )
+    
+    graph.add_edge(
+        "github_loader_agent",
+        "load_repository"
+    )
+    
+    graph.add_node(
+        "report_agent",
+        report_agent
+    )
+    
+    graph.add_edge(
+        "aggregate_results",
+        "report_agent"
+    )
+    
+    graph.add_edge(
+        "report_agent",
+        END
+    )
     return graph.compile()

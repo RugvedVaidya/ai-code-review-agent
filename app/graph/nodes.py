@@ -14,6 +14,12 @@ from app.utils.code_cleaner import (
     clean_python_code
 )
 import shutil
+from app.github.github_loader import (
+    clone_repository
+)
+from app.reports.report_generator import (
+    generate_report
+)
 
 llm = ChatOllama(
     model="qwen2.5-coder:7b"
@@ -343,3 +349,28 @@ def route_after_tests(state):
         return "max_retries"
 
     return "failed"
+
+def github_loader_agent(state):
+
+    if not state["repo_url"]:
+        return state
+
+    repo_path = clone_repository(
+        state["repo_url"]
+    )
+
+    return {
+        **state,
+        "repo_path": repo_path
+    }
+    
+def report_agent(state):
+
+    report_path = generate_report(
+        state["results"]
+    )
+
+    return {
+        **state,
+        "report_path": report_path
+    }

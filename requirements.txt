@@ -8,3 +8,4 @@ ruff
 python-multipart
 langgraph
 pytest
+gitpython
