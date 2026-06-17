@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+langchain
+langchain-ollama
+ollama
+bandit
+ruff
+python-multipart
