@@ -1,10 +1,7 @@
 from typing import TypedDict, List
 
-
 class ReviewState(TypedDict):
-
     repo_path: str
-
     files: List[str]
 
     ruff_results: List[dict]
@@ -12,7 +9,11 @@ class ReviewState(TypedDict):
     review_results: List[dict]
 
     generated_tests: List[dict]
-
     test_results: List[dict]
+
+    reflection_feedback: List[dict]
+
+    retry_count: int
+    max_retries: int
 
     results: List[dict]

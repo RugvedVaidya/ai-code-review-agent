@@ -11,6 +11,11 @@ def analyze_repository(repo_path):
         "ruff_results": [],
         "bandit_results": [],
         "review_results": [],
+        "generated_tests": [],
+        "test_results": [],
+        "reflection_feedback": [],
+        "retry_count": 0,
+        "max_retries": 3,
         "results": []
     }
 

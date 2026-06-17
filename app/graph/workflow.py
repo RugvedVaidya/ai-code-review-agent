@@ -86,10 +86,32 @@ def build_graph():
     
     graph.add_conditional_edges(
         "pytest_agent",
-        tests_passed,
+        route_after_tests,
         {
             "passed": "aggregate_results",
-            "failed": "aggregate_results"
+            "failed": "reflection_agent",
+            "max_retries": "aggregate_results"
         }
     )
+    
+    graph.add_node(
+        "reflection_agent",
+        reflection_agent
+    )
+
+    graph.add_node(
+        "code_fix_agent",
+        code_fix_agent
+    )
+    
+    graph.add_edge(
+        "reflection_agent",
+        "code_fix_agent"
+    )
+
+    graph.add_edge(
+        "code_fix_agent",
+        "pytest_agent"
+    )
+    
     return graph.compile()
