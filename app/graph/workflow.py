@@ -69,4 +69,27 @@ def build_graph():
         END
     )
 
+    graph.add_node(
+        "test_generation_agent",
+        test_generation_agent
+    )
+
+    graph.add_node(
+        "save_tests_agent",
+        save_tests_agent
+    )
+
+    graph.add_node(
+        "pytest_agent",
+        pytest_agent
+    )
+    
+    graph.add_conditional_edges(
+        "pytest_agent",
+        tests_passed,
+        {
+            "passed": "aggregate_results",
+            "failed": "aggregate_results"
+        }
+    )
     return graph.compile()

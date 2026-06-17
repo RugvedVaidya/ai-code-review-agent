@@ -7,3 +7,4 @@ bandit
 ruff
 python-multipart
 langgraph
+pytest
