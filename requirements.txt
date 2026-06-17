@@ -6,3 +6,4 @@ ollama
 bandit
 ruff
 python-multipart
+langgraph
