@@ -11,13 +11,18 @@ AI-powered code review tool built using:
 
 ## Features
 
+## Features
+
 - Repository scanning
-- Python file detection
-- Static analysis using Ruff
-- Security analysis using Bandit
-- AI code review using local LLMs
-- FastAPI API
-- CLI support
+- GitHub repository cloning
+- Ruff static analysis
+- Bandit security analysis
+- AI-powered code review using Ollama
+- Automated pytest test generation
+- Test execution and validation
+- Reflection-based code fixing
+- LangGraph agent workflow
+- Markdown report generation
 
 ## Installation
 
