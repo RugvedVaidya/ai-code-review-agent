@@ -22,3 +22,7 @@ class ReviewState(TypedDict):
     repo_url : str
     
     report_path : str
+    
+    pr_url : str 
+    changed_files : str 
+    pr_reviews : str 

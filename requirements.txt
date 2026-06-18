@@ -9,3 +9,5 @@ python-multipart
 langgraph
 pytest
 gitpython
+python-dotenv
+PyGithub

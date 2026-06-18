@@ -20,3 +20,10 @@ def analyze_github(
     return analyze_repository(
         repo_url=repo_url
     )
+    
+@app.get("/review-pr")
+def review_pr(pr_url: str):
+
+    return review_pull_request(
+        pr_url
+    )

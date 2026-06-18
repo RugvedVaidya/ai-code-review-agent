@@ -24,6 +24,9 @@ from app.reports.report_generator import (
 llm = ChatOllama(
     model="qwen2.5-coder:7b"
 )
+from app.github.pr_loader import (
+    get_pr_files
+)
 
 def load_repository(state):
 
@@ -373,4 +376,77 @@ def report_agent(state):
     return {
         **state,
         "report_path": report_path
+    }
+    
+def pr_loader_agent(state):
+
+    if not state["pr_url"]:
+        return state
+
+    changed_files = get_pr_files(
+        state["pr_url"]
+    )
+
+    return {
+        **state,
+        "changed_files": changed_files
+    }
+    
+def pr_review_agent(state):
+
+    reviews = []
+
+    for file in state["changed_files"]:
+
+        prompt = f"""
+Review this Git diff.
+
+Identify:
+
+- Bugs
+- Security issues
+- Performance concerns
+- Code quality issues
+
+Patch:
+
+{file['patch']}
+"""
+
+        response = llm.invoke(prompt)
+
+        reviews.append({
+            "file": file["filename"],
+            "review": response.content
+        })
+
+    return {
+        **state,
+        "pr_reviews": reviews
+    }
+    
+def patch_agent(state):
+
+    patches = []
+
+    for review in state["pr_reviews"]:
+
+        prompt = f"""
+Generate a code patch.
+
+Review:
+
+{review['review']}
+"""
+
+        response = llm.invoke(prompt)
+
+        patches.append({
+            "file": review["file"],
+            "patch": response.content
+        })
+
+    return {
+        **state,
+        "patch_suggestions": patches
     }
