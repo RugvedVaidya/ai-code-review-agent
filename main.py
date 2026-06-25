@@ -23,7 +23,6 @@ def analyze_github(
     
 @app.get("/review-pr")
 def review_pr(pr_url: str):
-
     return review_pull_request(
         pr_url
     )
